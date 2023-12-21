@@ -1,0 +1,2 @@
+# BarcodeTextScanner
+ Brcode scanner
