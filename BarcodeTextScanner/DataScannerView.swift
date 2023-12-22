@@ -10,7 +10,8 @@ import SwiftUI
 import VisionKit
 
 struct DataScannerView: UIViewControllerRepresentable {
-    
+    @Binding var shouldCapturePhoto: Bool
+    @Binding var capturedPhoto: IdentifiableImage?
     @Binding var recognizedItems: [RecognizedItem]
     let recognizedDataType: DataScannerViewController.RecognizedDataType
     let recognizedMultipleItems: Bool
@@ -29,6 +30,22 @@ struct DataScannerView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: DataScannerViewController, context: Context) {
         uiViewController.delegate = context.coordinator
         try? uiViewController.startScanning()
+        if shouldCapturePhoto {
+            capturePhoto(dataScannerVC: uiViewController)
+        }
+    }
+    
+    private func capturePhoto(dataScannerVC: DataScannerViewController) {
+        Task { @MainActor in
+            do {
+                let photo = try await dataScannerVC.capturePhoto()
+                self.capturedPhoto = .init(image: photo)
+
+            } catch {
+                print(error.localizedDescription)
+            }
+            self.shouldCapturePhoto = false
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -67,4 +84,9 @@ struct DataScannerView: UIViewControllerRepresentable {
         }
         
     }
+}
+
+struct IdentifiableImage: Identifiable {
+    let id = UUID()
+    let image: UIImage
 }

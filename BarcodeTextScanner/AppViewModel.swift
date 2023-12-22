@@ -10,6 +10,7 @@ import AVKit
 import Foundation
 import SwiftUI
 import VisionKit
+import PhotosUI
 
 enum ScanType: String {
     case text, barcode
@@ -31,6 +32,10 @@ class AppViewModel: ObservableObject {
     @Published var scanType: ScanType = .barcode
     @Published var textContentType : DataScannerViewController.TextContentType?
     @Published var recognizesMulitpleItems = true
+    
+    @Published var shouldCapturePhoto = false
+    @Published var capturedPhoto: IdentifiableImage? = nil
+    @Published var selectedPhotoPickerItem: PhotosPickerItem? = nil
     
     var recognizedDataType: DataScannerViewController.RecognizedDataType {
         scanType == .barcode ? .barcode() : .text(textContentType: textContentType)

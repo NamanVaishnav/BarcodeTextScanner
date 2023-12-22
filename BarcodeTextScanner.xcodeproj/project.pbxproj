@@ -13,6 +13,8 @@
 		102483C92B34762F00CDC0BB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 102483C82B34762F00CDC0BB /* Preview Assets.xcassets */; };
 		102483D22B3478F200CDC0BB /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102483D12B3478F200CDC0BB /* AppViewModel.swift */; };
 		102483D42B347D9B00CDC0BB /* DataScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102483D32B347D9B00CDC0BB /* DataScannerView.swift */; };
+		10535ECA2B35A78200CE08C4 /* LiveTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10535EC92B35A78200CE08C4 /* LiveTextView.swift */; };
+		10B0E5BE2B35CAEF00FFACE2 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10B0E5BD2B35CAEF00FFACE2 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		102483C82B34762F00CDC0BB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		102483D12B3478F200CDC0BB /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		102483D32B347D9B00CDC0BB /* DataScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScannerView.swift; sourceTree = "<group>"; };
+		10535EC92B35A78200CE08C4 /* LiveTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTextView.swift; sourceTree = "<group>"; };
+		10B0E5BD2B35CAEF00FFACE2 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				102483C72B34762F00CDC0BB /* Preview Content */,
 				102483D12B3478F200CDC0BB /* AppViewModel.swift */,
 				102483D32B347D9B00CDC0BB /* DataScannerView.swift */,
+				10535EC92B35A78200CE08C4 /* LiveTextView.swift */,
+				10B0E5BD2B35CAEF00FFACE2 /* Launch Screen.storyboard */,
 			);
 			path = BarcodeTextScanner;
 			sourceTree = "<group>";
@@ -133,6 +139,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10B0E5BE2B35CAEF00FFACE2 /* Launch Screen.storyboard in Resources */,
 				102483C92B34762F00CDC0BB /* Preview Assets.xcassets in Resources */,
 				102483C52B34762F00CDC0BB /* Assets.xcassets in Resources */,
 			);
@@ -147,6 +154,7 @@
 			files = (
 				102483C32B34762E00CDC0BB /* ContentView.swift in Sources */,
 				102483C12B34762E00CDC0BB /* BarcodeTextScannerApp.swift in Sources */,
+				10535ECA2B35A78200CE08C4 /* LiveTextView.swift in Sources */,
 				102483D22B3478F200CDC0BB /* AppViewModel.swift in Sources */,
 				102483D42B347D9B00CDC0BB /* DataScannerView.swift in Sources */,
 			);
@@ -282,6 +290,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = DocDigi;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This App need camera access to scan barcode and text";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -289,6 +298,7 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -322,6 +332,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = DocDigi;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This App need camera access to scan barcode and text";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -329,6 +340,7 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

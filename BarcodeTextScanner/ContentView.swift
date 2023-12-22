@@ -5,6 +5,7 @@
 //  Created by Naman Vaishnav on 21/12/23.
 //
 
+import PhotosUI
 import SwiftUI
 import VisionKit
 
@@ -36,10 +37,7 @@ struct ContentView: View {
     }
     
     private var mainView: some View {
-        DataScannerView(
-            recognizedItems: $vm.recognizedItems,
-            recognizedDataType: vm.recognizedDataType,
-            recognizedMultipleItems: vm.recognizesMulitpleItems)
+        liveImageFeed
         .background {
             Color.gray.opacity(0.3)
         }
@@ -51,6 +49,7 @@ struct ContentView: View {
                 .presentationDetents([.medium,.fraction(0.25)])
                 .presentationDragIndicator(.visible)
                 .interactiveDismissDisabled()
+                .disabled(vm.capturedPhoto != nil)
                 .onAppear{
                     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                           let controller = windowScene.windows.first?.rootViewController?.presentedViewController else {
@@ -58,10 +57,53 @@ struct ContentView: View {
                     }
                     controller.view.backgroundColor = .clear
                 }
+                .sheet(item: $vm.capturedPhoto) { photo in
+                    ZStack(alignment: .topTrailing, content: {
+                        Color.gray.ignoresSafeArea()
+                        LiveTextView(image: photo.image)
+                        Button {
+                            vm.capturedPhoto = nil
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .imageScale(.large)
+                                .foregroundStyle(.white)
+                                .padding()
+                                .background(.ultraThinMaterial)
+                        }
+                        .edgesIgnoringSafeArea(.bottom)
+                    })
+                    
+                }
         })
         .onChange(of: vm.scanType) { _ in vm.recognizedItems = [] }
         .onChange(of: vm.textContentType) { _ in vm.recognizedItems = [] }
         .onChange(of: vm.recognizesMulitpleItems) { _ in vm.recognizedItems = [] }
+        .onChange(of: vm.selectedPhotoPickerItem) { newValue in
+            guard let newValue = newValue else { return }
+            Task { @MainActor in
+                guard let data = try? await newValue.loadTransferable(type: Data.self),
+                        let image = UIImage(data: data)
+                else { return }
+                self.vm.capturedPhoto = .init(image: image)
+                
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var liveImageFeed: some View {
+        if let capturedPhoto = vm.capturedPhoto {
+            Image(uiImage: capturedPhoto.image)
+                .resizable()
+                .scaledToFit()
+        } else {
+            DataScannerView(
+                shouldCapturePhoto: $vm.shouldCapturePhoto,
+                capturedPhoto: $vm.capturedPhoto,
+                recognizedItems: $vm.recognizedItems,
+                recognizedDataType: vm.recognizedDataType,
+                recognizedMultipleItems: vm.recognizesMulitpleItems)
+        }
     }
     
     private var headerView: some View {
@@ -85,7 +127,24 @@ struct ContentView: View {
                 }.pickerStyle(.segmented)
             }
             
-            Text(vm.headerText).padding(.top)
+            
+            HStack {
+                Text(vm.headerText)
+                Spacer()
+                PhotosPicker(selection: $vm.selectedPhotoPickerItem, matching: .images) {
+                    Image(systemName: "photo.circle")
+                        .imageScale(.large)
+                        .font(.system(size: 32))
+                }
+                Button(action: {
+                    vm.shouldCapturePhoto = true
+                }, label: {
+                    Image(systemName: "camera.circle")
+                        .imageScale(.large)
+                        .font(.system(size: 32))
+                })
+            }
+            
             
         }
         .padding(.horizontal)
